@@ -1,15 +1,11 @@
 package com.martji.mdbhelper;
 
+import java.util.List;
+
 /**
  * Created by magq on 16/4/26.
  */
-public class MRecord {
-
-    public MRecord() {
-
-    }
-
-    public boolean save() {
-        return true;
-    }
+public interface MRecord {
+    boolean save();
+    List<Object> listAll();
 }
