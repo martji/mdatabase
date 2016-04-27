@@ -11,4 +11,9 @@ public class DataB extends MRecord {
     public boolean save() {
         return false;
     }
+
+    @Override
+    public boolean delete() {
+        return false;
+    }
 }

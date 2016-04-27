@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         MDBHelper.init(this);
         setListener();
 
-        updateTv(DataA.listAll());
+        updateTv(DataA.listAll(DataA.class));
     }
 
     private void setListener() {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 data.setAge(10);
                 data.save();
 
-                updateTv(DataA.listAll());
+                updateTv(DataA.listAll(DataA.class));
             }
         });
     }

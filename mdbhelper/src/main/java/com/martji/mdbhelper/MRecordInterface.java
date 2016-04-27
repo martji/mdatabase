@@ -5,4 +5,5 @@ package com.martji.mdbhelper;
  */
 public interface MRecordInterface {
     boolean save();
+    boolean delete();
 }
