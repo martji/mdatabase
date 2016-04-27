@@ -11,17 +11,21 @@ import java.util.List;
 /**
  * Created by Guoqing on 2016/4/26.
  */
-@DatabaseTable(tableName = "testdata")
-public class TestData implements MRecord {
+@DatabaseTable(tableName = "a_data")
+public class DataA extends MRecord {
 
     @DatabaseField(generatedId = true)
     private Integer id;
-    @DatabaseField
+    @DatabaseField(columnName = "name", canBeNull = false)
     private String name;
     @DatabaseField
     private Integer age;
 
-    private RuntimeExceptionDao<TestData, ?> runtimeDao;
+    private static RuntimeExceptionDao<DataA, ?> dao;
+
+    static {
+        dao = MDBHelper.getDBDao(DataA.class);
+    }
 
     public Integer getId() {
         return id;
@@ -47,26 +51,20 @@ public class TestData implements MRecord {
         this.age = age;
     }
 
-    public TestData() {
-        init();
-    }
+    public DataA() {
 
-    public void init() {
-        try{
-            runtimeDao = MDBHelper.getHelper().getRuntimeExceptionDao(TestData.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public boolean save() {
-        runtimeDao.createOrUpdate(this);
-        return false;
+        dao.createOrUpdate(this);
+        return true;
     }
 
-    @Override
-    public List<Object> listAll() {
-        return null;
+    public static List<?> listAll() {
+        if (dao == null) {
+            return null;
+        }
+        return dao.queryForAll();
     }
 }
